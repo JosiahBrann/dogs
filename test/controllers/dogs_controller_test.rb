@@ -23,4 +23,12 @@ class DogControllerTest < ActionDispatch::IntegrationTest
 
     assert_equal new_name, dog.name
   end
+
+  test "should show dog" do 
+    Dog.all.each do |dog|
+      get dog_url(dog), as: :json
+      assert_response :success
+    end
+  end
+
 end
