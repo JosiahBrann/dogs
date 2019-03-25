@@ -1,4 +1,5 @@
 class DogsController < ApplicationController
+  before_action :set_dog, only: [:show, :update, :destroy]
 
   def index
     @dogs = Dog.all
@@ -8,6 +9,10 @@ class DogsController < ApplicationController
   def create
     @dog = Dog.create!(dog_params)
     json_response(@dog, :created)
+  end
+
+  def show
+    json_response(@dog)
   end
 
   def update
@@ -20,4 +25,9 @@ class DogsController < ApplicationController
   def dog_params
     params.permit(:name)
   end
+
+  def set_dog
+    @dog = Dog.find(params[:id])
+  end
+
 end
