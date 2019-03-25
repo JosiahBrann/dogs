@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
-  resources :dogs
+  resources :dogs do
+    get 'search', on: :collection
+  end
 
 end

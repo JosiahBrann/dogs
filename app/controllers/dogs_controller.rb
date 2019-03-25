@@ -20,6 +20,12 @@ class DogsController < ApplicationController
     head :no_content
   end
 
+  def search
+    search_term = params[:query] || nil
+    dogs = Dog.where("name ILIKE '%#{search_term}%'") if search_term 
+    render json: dogs
+  end
+
   private
 
   def dog_params
