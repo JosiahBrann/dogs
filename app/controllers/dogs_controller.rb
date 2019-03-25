@@ -10,6 +10,10 @@ class DogsController < ApplicationController
     json_response(@dog, :created)
   end
 
+  def update
+    @dog.update(dog_params)
+    head :no_content
+  end
 
   private
 

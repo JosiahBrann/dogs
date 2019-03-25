@@ -16,4 +16,11 @@ class DogControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test "should update dog" do
+    dog = Dog.create!(name: "Dog") 
+    new_name = "New Name"
+    dog.update!(name: new_name)
+
+    assert_equal new_name, dog.name
+  end
 end
