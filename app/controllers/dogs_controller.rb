@@ -21,8 +21,14 @@ class DogsController < ApplicationController
   end
 
   def search
+    page = params[:page] || 1
+    page_length = params[:page_length] || 10
+    offset = ((page.to_i - 1) * page_length.to_i) || 0
     search_term = params[:query] || nil
-    dogs = Dog.where("name ILIKE '%#{search_term}%'") if search_term 
+    dogs = Dog
+            .where("name ILIKE '%#{search_term}%'")
+            .limit(page_length)
+            .offset(offset) if search_term 
     render json: dogs
   end
 
