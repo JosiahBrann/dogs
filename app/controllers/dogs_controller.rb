@@ -2,6 +2,9 @@
 
 class DogsController < ApplicationController
   before_action :set_dog, only: %i[show update destroy]
+  before_action do
+    ActiveStorage::Current.host = request.base_url
+  end
 
   def index
     @dogs = Dog.all
