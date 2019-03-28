@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class DogsController < ApplicationController
-  before_action :set_dog, only: [:show, :update, :destroy]
+  before_action :set_dog, only: %i[show update destroy]
 
   def index
     @dogs = Dog.all
@@ -25,10 +27,12 @@ class DogsController < ApplicationController
     page_length = params[:page_length] || 10
     offset = ((page.to_i - 1) * page_length.to_i) || 0
     search_term = params[:query] || nil
-    dogs = Dog
-            .where("name ILIKE '%#{search_term}%'")
-            .limit(page_length)
-            .offset(offset) if search_term 
+    if search_term
+      dogs = Dog
+             .where("name ILIKE '%#{search_term}%'")
+             .limit(page_length)
+             .offset(offset)
+    end
     render json: dogs
   end
 
@@ -41,5 +45,4 @@ class DogsController < ApplicationController
   def set_dog
     @dog = Dog.find(params[:id])
   end
-
 end

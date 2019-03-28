@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class DogTest < ActiveSupport::TestCase
@@ -12,7 +14,7 @@ class DogTest < ActiveSupport::TestCase
 
   test 'validates unique name' do
     duplicate_dog = @valid_dog.dup
-    assert_not duplicate_dog.valid? 
+    assert_not duplicate_dog.valid?
   end
 
   test 'invalid without name' do
