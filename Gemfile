@@ -21,6 +21,7 @@ gem 'puma', '~> 3.11'
 
 # Use AciveModel Serializer
 gem 'active_model_serializers'
+gem 'aws-sdk-s3', require: false
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
